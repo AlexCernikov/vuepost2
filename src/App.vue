@@ -1,30 +1,57 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div class="container">
+  <post-form/>
+  <post-list :posts="posts"/> 
+  <!-- v-bind:posts -->
+</div>
 </template>
 
+<script>
+import PostForm from '@/components/PostForm';
+import PostList from '@/components/PostList';
+
+export default {
+  components: {
+    PostForm, PostList
+    },
+  data () {
+    return {
+     posts: [
+       {id:1, title: 'JavaScript 1', body: 'Description 1'},
+       {id:2, title: 'JavaScript 2', body: 'Description 2'},
+       {id:3, title: 'JavaScript 3', body: 'Description 3'}
+     ],
+     title: '',
+     body: ''
+    }
+  },
+  methods:{
+    createPost(){
+      
+      const newPost = {
+        id: Date.now(),
+        title: this.title,
+        body: this.body,
+        }
+        this.posts.push(newPost);
+        this.title = '';
+        this.body = '';
+    }
+   }
+  }
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
 }
 
-nav {
-  padding: 30px;
-}
+.container{
+  max-width: 1120px;
+  margin: auto;
+  }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
+ 
 </style>
