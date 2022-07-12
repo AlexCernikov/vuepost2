@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-  <post-form/>
+  <post-form @create = "createPost"/>
   <post-list :posts="posts"/> 
   <!-- v-bind:posts -->
 </div>
@@ -21,21 +21,12 @@ export default {
        {id:2, title: 'JavaScript 2', body: 'Description 2'},
        {id:3, title: 'JavaScript 3', body: 'Description 3'}
      ],
-     title: '',
-     body: ''
     }
   },
   methods:{
-    createPost(){
+    createPost(post){
+      this.posts.push(post)
       
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        body: this.body,
-        }
-        this.posts.push(newPost);
-        this.title = '';
-        this.body = '';
     }
    }
   }
